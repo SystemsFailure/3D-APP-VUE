@@ -1,5 +1,6 @@
 <template lang="html">
     <section class="layers">
+        <NavView></NavView>
         
         <img 
             v-if="!store.state.auth"
@@ -46,26 +47,39 @@
 <script setup>
 import MessangerView from '@/components/MessangerView.vue';
 import AuthView from '@/components/AuthView.vue';
+import NavView from '@/components/NavView.vue'
 
 import { onMounted } from 'vue';
 import { useStore } from 'vuex';
+import { io } from "socket.io-client";
 
 const store = useStore();
 
 onMounted(() => {
+    connect_socket();
+
     document.addEventListener('mousemove', e => {
     Object.assign(document.documentElement, {
         style: `
             --move-x: ${(e.clientX - window.innerWidth / 2) * -0.003}deg;
             --move-y: ${(e.clientY - window.innerHeight / 2) * -0.009}deg;
         `
+        })
+    })
+
+    document.getElementById('btn-deal-start').addEventListener('click', e => {
+        store.commit('ch_visible_text_or_blockMessanger', false);
     })
 })
 
-document.getElementById('btn-deal-start').addEventListener('click', e => {
-    store.commit('ch_visible_text_or_blockMessanger', false);
-})
-})
+function connect_socket() {
+    const URL = process.env.NODE_ENV === "production" ? undefined : "http://localhost:3000";
+    const socket = io(URL);
+    socket.on("connect", () => {
+        console.log('conn');
+    });
+
+}
 </script>
 <style lang="scss" scoped>
 
@@ -73,6 +87,7 @@ document.getElementById('btn-deal-start').addEventListener('click', e => {
 .layers  {
     perspective: 1600px;
     overflow: hidden;
+    
 }
 
 .icon__user {

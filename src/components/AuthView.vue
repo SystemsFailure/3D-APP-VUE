@@ -8,6 +8,14 @@
             <div class="loggin_form">
                 <input id="em-id" type="text" placeholder="E-mail">
                 <input type="text" placeholder="Password">
+                <h5>Don't have a <span>account</span></h5>
+                <button>auth</button>
+            </div>
+
+            <div class="signin_form">
+                <input id="em-id" type="text" placeholder="E-mail">
+                <input type="text" placeholder="Enter Password">
+                <input type="text" placeholder="Repeat password">
                 <h5>Already have an <span>account</span></h5>
                 <button>auth</button>
             </div>
@@ -43,6 +51,45 @@ import store from '@/store';
         align-items: center;
         justify-content: center;
 
+        .signin_form {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+            input {
+                width: calc(var(--index) * 14);
+                height: calc(var(--index) * 1.2);
+                margin-top: 10px;
+                background-color: transparent;
+                outline: none;
+                border: 1px solid rgba($color: #c5c5c5, $alpha: .5);
+                padding: calc(var(--index) * .7);
+                color: white;
+            }
+    
+            h5 {
+                margin-top: 15px;
+    
+                span {
+                    color:#c897ff;
+                    &:hover {
+                        cursor: pointer;
+                        opacity: .5;
+                        transition: .3s;
+                    }
+                }
+            }
+
+            button {
+                position: absolute;
+                right: 50px;
+                bottom: 50px;
+                padding: calc(var(--index) * .3) calc(var(--index) * 1);
+            }
+        }
         .loggin_form {
             width: 100%;
             height: 50%;
