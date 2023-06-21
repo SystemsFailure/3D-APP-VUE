@@ -10,12 +10,13 @@ async function createUser(req, res, next) {
                 {
                     userName: req.body.name,
                     userEmail: req.body.email,
+                    hsPassword: req.body.password,
                 }
             )
-            res.send('User was been created');
+            res.send({message: 'User was been created', result: true});
 
         } else {
-            res.send('field name and email is dont exists');
+            res.send({message: 'field name and email is dont exists', result: false});
         }
 
     } else {

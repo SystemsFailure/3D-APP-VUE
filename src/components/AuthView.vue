@@ -6,25 +6,46 @@
         <div class="auth__container">
 
             <div class="loggin_form">
-                <input id="em-id" type="text" placeholder="E-mail">
-                <input type="text" placeholder="Password">
+                <input id="em-id" type="text" placeholder="E-mail"  v-model="fieldEmail" @input="test_input">
+                <input type="text" placeholder="Password"  v-model="fieldPassword">
                 <h5>Don't have a <span>account</span></h5>
                 <button>auth</button>
             </div>
 
             <div class="signin_form">
-                <input id="em-id" type="text" placeholder="E-mail">
+                <input id="name-id" type="text" placeholder="Enter name" v-model="fieldRegisName">
+                <input id="em-id" type="text" placeholder="E-mail" v-model="fieldRegisEmail">
                 <input type="text" placeholder="Enter Password">
-                <input type="text" placeholder="Repeat password">
+                <input type="text" placeholder="Repeat password" v-model="fieldRegisPassword">
                 <h5>Already have an <span>account</span></h5>
-                <button>auth</button>
+                <button @click="regis">auth</button>
             </div>
         </div>
     </div>
 </template>
 <script setup>
 import store from '@/store';
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { authUser, regisUser } from '@/services/userService';
 
+const router = useRouter();
+
+const fieldEmail = ref(undefined);
+const fieldPassword = ref(undefined);
+
+const fieldRegisName = ref(undefined);
+const fieldRegisEmail = ref(undefined);
+const fieldRegisPassword = ref(undefined);
+
+function auth() {
+    authUser(fieldEmail.value, fieldPassword.value);
+}
+
+function regis() {
+    let result = regisUser(fieldRegisName.value, fieldRegisEmail.value, fieldRegisPassword.value);
+    result ? router.push('/confirm') : console.log('dont regis'); return;
+}
 
 </script>
 

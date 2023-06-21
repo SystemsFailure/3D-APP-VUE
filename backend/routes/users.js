@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 router.get('/getUser', getUser);
-router.get('/authUser', authUser);
+router.post('/authUser', authUser);
 
 // POST users listing
 router.post('/createUser', createUser);

@@ -4,6 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser')
+const cors = require('cors');
+
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -19,6 +21,11 @@ const {User, Messages} = require('./database/models/index');
 
 User.hasMany(Messages, {foreignKey: 'toId'})
 User.hasMany(Messages, {foreignKey: 'fromId'})
+
+app.use(cors({
+  origin: 'http://localhost:8080'
+}));
+
 
 const io = require("socket.io")(server, {
   cors: {

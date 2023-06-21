@@ -14,7 +14,7 @@ const User = sequelize.define('User',
             defaultValue: "undefined",
         },
         hsPassword: {
-            type: DataTypes.STRING(50),
+            type: DataTypes.STRING(500),
             allowNull: false,
             defaultValue: "undefined",
         }
