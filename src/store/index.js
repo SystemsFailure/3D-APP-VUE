@@ -9,6 +9,8 @@ export default createStore({
     auth: false,
     visible_text_or_blockMessanger: true,
     visible_auth_window: false,
+    visible_about_window: false,
+    visible_skills_window: false,
   },
   getters: {
   },
@@ -18,7 +20,16 @@ export default createStore({
     },
     ch_visible_auth_window(st, vl) {
       st.visible_auth_window = vl;
-    }
+    },
+    ch_visible_about_window(st, vl) {
+      st.visible_about_window = vl;
+    },
+    cv_visible_skills_window(st, vl) {
+      st.visible_skills_window = vl;
+    },
+    setAuth(st, vl) {
+      st.auth = vl
+    },
   },
   actions: {
   },

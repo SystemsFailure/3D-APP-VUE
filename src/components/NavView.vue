@@ -1,13 +1,18 @@
 <template lang="html">
     <div class="nav">
         <div class="nav__container">
-            <h5>Accaut</h5>
-            <h5>About me</h5>
-            <h5>Skills</h5>
+            <h5 @click="reloadPage()">Home</h5>
+            <h5 @click="store.commit('ch_visible_about_window', true)">About me</h5>
+            <h5 @click="store.commit('cv_visible_skills_window', true)">Skills</h5>
         </div>
     </div>
 </template>
 <script setup>
+import store from '@/store';
+
+function reloadPage() {
+    window.location.reload();
+}
     
 </script>
 <style lang="scss" scoped>

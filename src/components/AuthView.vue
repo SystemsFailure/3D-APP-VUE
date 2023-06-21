@@ -4,22 +4,25 @@
         <img @click="store.commit('ch_visible_auth_window', false)" width="30" height="30" src="https://img.icons8.com/material/48/ffffff/delete-sign--v1.png" alt="delete-sign--v1"/>
 
         <div class="auth__container">
+            <Transition name="slide-up">
+                <div class="loggin_form" v-if="showAuthView">
+                    <input id="em-id" type="text" placeholder="E-mail"  v-model="fieldEmail" @input="test_input">
+                    <input type="text" placeholder="Password"  v-model="fieldPassword">
+                    <h5>Don't have a <span @click="showAuthView = false">account</span></h5>
+                    <button @click="auth">auth</button>
+                </div>
 
-            <div class="loggin_form">
-                <input id="em-id" type="text" placeholder="E-mail"  v-model="fieldEmail" @input="test_input">
-                <input type="text" placeholder="Password"  v-model="fieldPassword">
-                <h5>Don't have a <span>account</span></h5>
-                <button>auth</button>
-            </div>
+            </Transition>
+            <Transition name="slide-up">
+                <div class="signin_form" v-if="!showAuthView">
+                    <input id="name-id" type="text" placeholder="Enter name" v-model="fieldRegisName">
+                    <input id="em-id" type="text" placeholder="E-mail" v-model="fieldRegisEmail">
+                    <input type="text" placeholder="Password" v-model="fieldRegisPassword">
+                    <h5>Already have an <span @click="showAuthView = true">account</span></h5>
+                    <button @click="regis">regis</button>
+                </div>
+            </Transition>
 
-            <div class="signin_form">
-                <input id="name-id" type="text" placeholder="Enter name" v-model="fieldRegisName">
-                <input id="em-id" type="text" placeholder="E-mail" v-model="fieldRegisEmail">
-                <input type="text" placeholder="Enter Password">
-                <input type="text" placeholder="Repeat password" v-model="fieldRegisPassword">
-                <h5>Already have an <span>account</span></h5>
-                <button @click="regis">auth</button>
-            </div>
         </div>
     </div>
 </template>
@@ -38,8 +41,24 @@ const fieldRegisName = ref(undefined);
 const fieldRegisEmail = ref(undefined);
 const fieldRegisPassword = ref(undefined);
 
-function auth() {
-    authUser(fieldEmail.value, fieldPassword.value);
+let showAuthView = ref(true);
+
+async function auth() {
+    await authUser(fieldEmail.value, fieldPassword.value).then(resultData => {
+        if(resultData.result === true) {
+            console.log('rsData', resultData);
+            fieldEmail.value = '';
+            fieldPassword.value = '';
+            localStorage.setItem('user', JSON.stringify(resultData.user));
+            store.commit('setAuth', true);
+        } else {
+            console.log('so user is not defined in base, sorry');
+            fieldEmail.value = '';
+            fieldPassword.value = '';
+            alert('so user is not exists');
+            return;
+        }
+    })
 }
 
 function regis() {
@@ -64,6 +83,8 @@ function regis() {
     flex-direction: column;
     justify-content: center;
 
+    z-index: 1;
+
     .auth__container {
         width: 100%;
         height: 100%;
@@ -79,6 +100,12 @@ function regis() {
             flex-direction: column;
             align-items: center;
             justify-content: center;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%);
             
             input {
                 width: calc(var(--index) * 14);
@@ -118,6 +145,12 @@ function regis() {
             flex-direction: column;
             align-items: center;
             justify-content: center;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%);
             
             input {
                 width: calc(var(--index) * 14);

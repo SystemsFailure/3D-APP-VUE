@@ -41,4 +41,36 @@ body {
     padding: 0;
 }
 
+// ANIMATION SECTION
+
+
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all .3s ease-out;
+}
+.slide-up-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+// LEFT ANIM
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 0.15s ease-out;
+}
+.slide-left-enter-from {
+  opacity: 0;
+  transform: translateX(30px);
+}
+.slide-left-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
 </style>

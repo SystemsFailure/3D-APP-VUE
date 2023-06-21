@@ -1,5 +1,5 @@
 <template lang="html">
-    <section class="layers">
+    <div class="layers">
         <NavView></NavView>
         
         <img 
@@ -38,16 +38,26 @@
             <div class="layers__item layer-7" :style="{'background-image': 'url(' + require('../assets/layers/BlurBlink.png') + ')'}"></div>
             <div class="layers__item layer-8" :style="{'background-image': 'url(' + require('../assets/layers/layer-6.png') + ')'}"></div>
         </div>
-    </section>
+
+        <Transition name="slide-up">
+            <MessangerView v-if="!store.state.visible_text_or_blockMessanger"></MessangerView>
+        </Transition>
+        <Transition name="slide-left">
+            <AuthView v-if="store.state.visible_auth_window"></AuthView>
+        </Transition>
+        <AboutVIew v-if="store.state.visible_about_window"></AboutVIew>
+        <SkillsView v-if="store.state.visible_skills_window"></SkillsView>
+    </div>
     
-    <AuthView v-if="store.state.visible_auth_window"></AuthView>
-    <MessangerView v-if="!store.state.visible_text_or_blockMessanger"></MessangerView>
+
 
 </template>
 <script setup>
 import MessangerView from '@/components/MessangerView.vue';
 import AuthView from '@/components/AuthView.vue';
-import NavView from '@/components/NavView.vue'
+import NavView from '@/components/NavView.vue';
+import AboutVIew from '@/components/AboutVIew.vue';
+import SkillsView from '@/components/SkillsView.vue';
 
 import { onMounted } from 'vue';
 import { useStore } from 'vuex';
@@ -87,7 +97,8 @@ function connect_socket() {
 .layers  {
     perspective: 1600px;
     overflow: hidden;
-    
+    width: 100%;
+    height: 100vh;
 }
 
 .icon__user {
@@ -108,6 +119,7 @@ function connect_socket() {
     transform: rotateX(var(--move-y)) rotateY(var(--move-x));
     will-change: transform;
     transition: transform var(--transition);
+
 }
 
 .layers__item {
@@ -158,7 +170,7 @@ function connect_socket() {
     font-size: calc(var(--index) * 2);
     text-transform: uppercase;
     letter-spacing: calc(var(--index) * -.15);
-    line-height: 1.3em;
+    line-height: 1.8em;
 }
 
 .hero-content span {
@@ -193,4 +205,7 @@ function connect_socket() {
 .layer-8 {
     pointer-events: none;
 }
+
+
+
 </style>

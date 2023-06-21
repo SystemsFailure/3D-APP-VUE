@@ -18,9 +18,12 @@ import { ref } from 'vue';
 import { onUpdated, onMounted } from 'vue';
 import { SHA1,enc } from "crypto-js";
 import sha256 from 'crypto-js/sha256';
+import { useRouter } from 'vue-router';
 
 let countdown = ref(countdown_());
 let fieldNumber = ref(undefined);
+
+const router = useRouter();
 
 setInterval(() => {
     if(countdown.value <= 0) return;
@@ -44,7 +47,10 @@ function confirmMail() {
         if(isNaN(parsed_num) || parsed_num === 0) console.log('number invalid');
         else {
             parsed_num = sha256(`${parsed_num}`, '-random-');
-            console.log(parsed_num.toString(enc.Hex) === localStorage.getItem('randomValues'))
+            if(parsed_num.toString(enc.Hex) === localStorage.getItem('randomValues')) {
+                console.log(parsed_num.toString(enc.Hex) === localStorage.getItem('randomValues'));
+                router.push('/');
+            }
         }
     }
 }

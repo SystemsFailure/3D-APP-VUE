@@ -31,10 +31,13 @@ async function regisUser(name, email, password) {
 }
 
 async function authUser(email, password) {
+    let data = undefined;
     const hashPassword = mutationPassword(password);
     await axios.post(store.state.url + '/users/authUser', {email: email, password: hashPassword}).then(res => {
         console.log(res.data, res.headers, res.status);
+        data = res.data;
     }).catch(err => console.log(err));
+    return data;
 }
 
 export {

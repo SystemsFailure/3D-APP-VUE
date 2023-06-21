@@ -27,7 +27,7 @@ const store = useStore();
 $index: calc(1vw + 1vh);
 .messanger {
     position: absolute;
-    width: calc($index * 50);   
+    width: calc($index * 50); 
     height: calc($index * 25);
     background-color: rgba($color: #000000, $alpha: .2);
     backdrop-filter: blur(12px);

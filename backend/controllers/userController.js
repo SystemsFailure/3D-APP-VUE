@@ -59,7 +59,7 @@ module.exports.authUser = async (req, res, next) => {
                 req.body
             ]
         )
-        res.send({message : 'auth false', user: user, result: true});
+        res.send({message : 'auth false', user: user, result: false});
     }
     
 }
