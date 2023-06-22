@@ -61,7 +61,7 @@ let arr_work_numbers = ref([
 </script>
 <style lang="scss" scoped>
 $background-color: rgb(0, 0, 0);
-$text-handler-color: #00ccff;
+$text-handler-color: #c897ff;
 
 
 .main-div-About-comp{
@@ -126,7 +126,7 @@ $text-handler-color: #00ccff;
 
   h1 {
     width: fit-content;
-    border-bottom: 1px solid #00ccff;
+    border-bottom: 1px solid #c897ff;
   }
 
   span {

@@ -29,7 +29,7 @@
             
             <div class="layers__item layer-6">
                 <div class="hero-content">
-                    <h1 v-if="store.state.visible_text_or_blockMessanger">Portfolio 3D site for <span>our deal</span></h1>
+                    <h1 v-if="store.state.visible_text_or_blockMessanger">Avery Vlad <span>for our deal</span></h1>
                     <button class="button-start" id="btn-deal-start">Start Deal</button>
                 </div>
             </div>
@@ -175,6 +175,7 @@ function connect_socket() {
 
 .hero-content span {
     display: block;
+    font-size: 40px;
 }
 
 .button-start {

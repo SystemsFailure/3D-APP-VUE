@@ -1,4 +1,5 @@
 const {Messages, check_MessagesModel} = require('../database/models/index')
+const { Op } = require("sequelize");
 
 async function createMessage(req, res, next) {
     check_MessagesModel();
@@ -18,12 +19,17 @@ async function createMessage(req, res, next) {
 }
 
 module.exports.findAllMessages = async (req, res, next) => {
-    res.send( 
+    console.log(req.body.toId, req.body.fromId, 'found all messages');
+    res.send(
         await Messages.findAll(
             {
                 where: {
-                    toId: req.body.toId,
-                    fromId: req.body.fromId,
+                    toId: {
+                        [Op.or]: [req.body.toId, req.body.fromId]
+                    },
+                    fromId: {
+                        [Op.or]: [req.body.toId, req.body.fromId]
+                    },
                 }
             }
         )

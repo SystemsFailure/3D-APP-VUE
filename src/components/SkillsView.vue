@@ -100,7 +100,7 @@ const list_do = ref(
 </script>
 <style lang="scss" scoped>
 $background-color: rgb(0, 0, 0);
-$text-handler-color: #00ccff;
+$text-handler-color: #c897ff;
 
 .main-div-Resume-comp{
     position: absolute;
@@ -141,7 +141,6 @@ $text-handler-color: #00ccff;
     width: 100%;
     height: 100%;
   .inner {
-    
     display: flex;
     backdrop-filter: blur(7px);
 
@@ -164,7 +163,7 @@ $text-handler-color: #00ccff;
             font-weight: bold;
             text-transform: uppercase;
             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            border-bottom: 1px solid #00ccff;
+            border-bottom: 1px solid #c897ff;
           }
 
           h6 {
@@ -224,7 +223,7 @@ $text-handler-color: #00ccff;
             .progress {
               // width: 34%;
               height: 100%;
-              background-color: #00ccff;
+              background-color: #c897ff;
               height: 1px;
             }
           }
@@ -248,7 +247,7 @@ $text-handler-color: #00ccff;
           font-weight: bold;
           text-transform: uppercase;
           font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-          border-bottom: 1px solid #00ccff;
+          border-bottom: 1px solid #c897ff;
         }
       }
     }
